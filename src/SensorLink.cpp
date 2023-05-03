@@ -121,7 +121,7 @@ String SensorLink::atcmd_key(String at)
 }
 
 // To get lora parameter status
-String SensorLink::atcmd_status(String at, string _t1_, String _t2_)
+String SensorLink::atcmd_status(String at, String _t1_, String _t2_)
 {
     char r[10];
     String txt = "";
@@ -198,7 +198,7 @@ String SensorLink::atcmd_hex(String at)
     while (Serial2.available())
     {
         r[i] = (char)Serial2.read();
-        if (isHexadecimalDigital(r[i]) or r[i] == ':')
+        if (isHexadecimalDigital(r[i]) || r[i] == ':')
         {
             txt += r[i];
         }
@@ -281,7 +281,7 @@ String SensorLink::get_module()
     }
     else
     {
-        txt = "DISCONNECT"
+        txt = "DISCONNECT";
     }
     return txt;
 }
@@ -307,7 +307,7 @@ void SensorLink::set_reboot()
 ##########################################*/
 
 // To access the unique application identifier
-String SensorLink::get_appeui();
+String SensorLink::get_appeui()
 {
     return atcmd_key(_GET_APPEUI);
 }
@@ -336,7 +336,7 @@ String SensorLink::get_deveui()
 }
 
 // To get or set the network session key
-String SensorLink::get_nwkskeyk()
+String SensorLink::get_nwkskey()
 {
     return atcmd_key(_GET_NWKSKEY);
 }
@@ -438,7 +438,7 @@ String SensorLink::get_recv()
 bool SensorLink::send(int p, String t)
 {
     String cmd = String(_SEND) + String(p) + String(":") + String(t);
-    Serial.println(">> UPLINK: " + String(p) String(":") + String(t));
+    Serial.println(">> UPLINK: " + String(p) + String(":") + String(t));
     Serial2.print(cmd);
     delay(100);
 
@@ -446,7 +446,7 @@ bool SensorLink::send(int p, String t)
     return_bool = false;
     String txt = "";
     int i = 0;
-    while (Serail2.available())
+    while (Serial2.available())
     {
         r[i] = (char)Serial2.read();
         if (isAlpha(r[i]))
@@ -476,12 +476,12 @@ bool SensorLink::lpsend(int p, int a, String t)
     return_bool = false;
     String txt = "";
     int i = 0;
-    while (Serail2.available())
+    while (Serial2.available())
     {
         r[i] = (char)Serial2.read();
         if (isAlpha(r[i]))
         {
-            txt += r[i]
+            txt += r[i];
         }
         i++;
     }
@@ -534,7 +534,7 @@ String SensorLink::get_loraclass()
         }
         i++;
     }
-    return retrun_text;
+    return return_text;
 }
 
 // To access the duty cycle
@@ -657,8 +657,10 @@ String SensorLink::get_lbtrssi()
 }
 
 // To access the SNR of the last received packet
-String SensorLink::get_snr(){
-    return atcmd_int(_GET_SNR)}
+String SensorLink::get_snr()
+{
+    return atcmd_int(_GET_SNR);
+}
 
 // To access the version of the firmware
 String SensorLink::get_ver()

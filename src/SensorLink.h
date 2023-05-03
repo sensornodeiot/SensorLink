@@ -57,7 +57,7 @@ public:
     String dport;
     String dpayload;
 
-    bool set_appuei(String _NVALUE_);
+    bool set_appeui(String _NVALUE_);
     bool set_appkey(String _NVALUE_);
     bool set_appskey(String _NVALUE_);
     bool set_devaddr(String _NVALUE_);
