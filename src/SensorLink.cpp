@@ -21,7 +21,6 @@ SensorLink::SensorLink()
 // GET
 #define _ATZ "ATZ"                  // to trigger a reset on the module
 #define _GET_AT "AT"                // to check that the link is working properly
-#define _GET_RECV "AT+RECV"         // to access the last received data in hex format
 #define _GET_APPEUI "AT+APPEUI=?"   // to access the unique application identifier
 #define _GET_APPKEY "AT+APPKEY=?"   // to access the application key
 #define _GET_APPSKEY "AT+APPSKEY=?" // to set the application session key
@@ -87,7 +86,7 @@ String SensorLink::payload(String at)
 {
     dpayload = "";
     dport = "";
-    String Input = check_payload(at);
+    String input = check_payload(at);
     for (int i = 0; i < input.length(); i++)
     {
         if (input.substring(i, i + 1) == ":")
@@ -111,7 +110,7 @@ String SensorLink::atcmd_key(String at)
     while (Serial2.available())
     {
         r[i] = (char)Serial2.read();
-        if (isHexadecimalDigital(r[i]) or r[i] == ":")
+        if (isHexadecimalDigital(r[i]) || r[i] == ":")
         {
             txt += r[i];
         }
@@ -198,7 +197,7 @@ String SensorLink::atcmd_hex(String at)
     while (Serial2.available())
     {
         r[i] = (char)Serial2.read();
-        if (isHexadecimalDigital(r[i]) || r[i] == ':')
+        if (isHexadecimalDigit(r[i]) || r[i] == ':')
         {
             txt += r[i];
         }
@@ -223,7 +222,7 @@ String SensorLink::check_payload(String at)
     while (Serial2.available())
     {
         r[i] = (char)Serial2.read();
-        if ((isHexadecimalDigit(r[i]) or r[i] == ':') and !isUpperCase(r[i]))
+        if ((isHexadecimalDigit(r[i]) || r[i] == ':') && !isUpperCase(r[i]))
         {
             txt += r[i];
         }

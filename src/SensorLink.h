@@ -14,7 +14,7 @@ public:
     String payload(String at);
     String atcmd_key(String at);
     String atcmd_status(String at, String _t1_, String _t2_);
-    String atcmd_txt(String at);
+    String atcmd_text(String at);
     String atcmd_int(String at);
     String atcmd_hex(String at);
     String check_payload(String at);
