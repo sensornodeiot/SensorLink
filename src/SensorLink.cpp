@@ -110,7 +110,7 @@ String SensorLink::atcmd_key(String at)
     while (Serial2.available())
     {
         r[i] = (char)Serial2.read();
-        if (isHexadecimalDigital(r[i]) || r[i] == ":")
+        if (isHexadecimalDigit(r[i]) || r[i] == ":")
         {
             txt += r[i];
         }
