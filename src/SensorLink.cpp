@@ -104,13 +104,13 @@ String SensorLink::atcmd_key(String at)
 {
     char r[10];
     String txt = "";
-    Serial2.print(at);
+    Serial2.println(at);
     delay(200);
     int i = 0;
     while (Serial2.available())
     {
         r[i] = (char)Serial2.read();
-        if (isHexadecimalDigit(r[i]) || r[i] == ':')
+        if (isHexadecimalDigit(r[i]) or r[i] == ':')
         {
             txt += r[i];
         }
@@ -124,7 +124,7 @@ String SensorLink::atcmd_status(String at, String _t1_, String _t2_)
 {
     char r[10];
     String txt = "";
-    Serial2.print(at);
+    Serial2.println(at);
     delay(2000);
     int i = 0;
     while (Serial2.available())
@@ -151,7 +151,7 @@ String SensorLink::atcmd_text(String at)
 {
     char r[10];
     String txt = "";
-    Serial2.print(at);
+    Serial2.println(at);
     delay(200);
     int i = 0;
     while (Serial2.available())
@@ -171,7 +171,7 @@ String SensorLink::atcmd_int(String at)
 {
     char r[10];
     String txt = "";
-    Serial2.print(at);
+    Serial2.println(at);
     delay(200);
     int i = 0;
     while (Serial2.available())
@@ -191,7 +191,7 @@ String SensorLink::atcmd_hex(String at)
 {
     char r[50];
     String txt = "";
-    Serial2.print(at);
+    Serial2.println(at);
     delay(200);
     int i = 0;
     while (Serial2.available())
@@ -212,7 +212,7 @@ String SensorLink::check_payload(String at)
     if (at == "A")
     {
         // TOFIX: Acer ship use _GET_REVCN
-        Serial2.print(_GET_RECV);
+        Serial2.println(_GET_RECV);
         delay(200);
     }
 
@@ -262,7 +262,7 @@ String SensorLink::get_module()
 {
     char r[10];
     String txt = "";
-    Serial2.print(_GET_AT);
+    Serial2.println(_GET_AT);
     delay(100);
     int i = 0;
     while (Serial2.available())
@@ -288,7 +288,7 @@ String SensorLink::get_module()
 void SensorLink::set_reboot()
 {
     Serial.println("> MODULE REBOOT...");
-    Serial2.print("ATZ");
+    Serial2.println("ATZ");
     delay(100);
     Serial.print("> ");
     for (int i = 0; i < 5; i++)
@@ -366,7 +366,7 @@ bool SensorLink::join()
     Serial.println("> LoRaWAN AS918, Lao PDR");
     Serial.println("> --------------------------------------");
 
-    Serial2.print(_GET_AT);
+    Serial2.println(_GET_AT);
     delay(100);
 
     return_bool = false;
@@ -374,7 +374,7 @@ bool SensorLink::join()
     {
         char r[10];
         String njs = "";
-        Serial2.print(_GET_NJS);
+        Serial2.println(_GET_NJS);
         delay(1000);
         int i = 0;
         while (Serial2.available())
@@ -395,7 +395,7 @@ bool SensorLink::join()
         if (njs == "0")
         {
             Serial.print(".");
-            Serial2.print(_JOIN);
+            Serial2.println(_JOIN);
             delay(8000);
             return_bool = false; // check join again
         }
@@ -406,9 +406,9 @@ bool SensorLink::join()
 // To join a LoRaWAN network in ADP mode
 bool SensorLink::join_adp()
 {
-    Serial2.print(_GET_AT);
+    Serial2.println(_GET_AT);
     delay(100);
-    Serial2.print(_JOIN);
+    Serial2.println(_JOIN);
     return_bool = true;
 
     // TOFIX: Remove if this code's not functioning
@@ -438,7 +438,7 @@ bool SensorLink::send(int p, String t)
 {
     String cmd = String(_SEND) + String(p) + String(":") + String(t);
     Serial.println(">> UPLINK: " + String(p) + String(":") + String(t));
-    Serial2.print(cmd);
+    Serial2.println(cmd);
     delay(100);
 
     char r[10];
@@ -468,7 +468,7 @@ bool SensorLink::lpsend(int p, int a, String t)
 {
     String cmd = String(_LPSEND) + String(p) + String(":") + String(a) + String(":") + String(t);
     Serial.println("<< UPLINK: " + String(p) + String(":") + String(a) + String(":") + String(t));
-    Serial2.print(cmd);
+    Serial2.println(cmd);
     delay(100);
 
     char r[10];
@@ -510,7 +510,7 @@ String SensorLink::get_loraclass()
 {
     char r[10];
     return_text = "";
-    Serial2.print(_GET_CLASS);
+    Serial2.println(_GET_CLASS);
     delay(100);
     int i = 0;
     while (Serial2.available())
@@ -595,7 +595,7 @@ String SensorLink::get_txp()
 {
     char r[10];
     return_text = "";
-    Serial2.print(_GET_TXP);
+    Serial2.println(_GET_TXP);
     delay(100);
     int i = 0;
     while (Serial2.available())
@@ -666,7 +666,7 @@ String SensorLink::get_ver()
 {
     char r[10];
     String txt = "";
-    Serial2.print(_GET_VER);
+    Serial2.println(_GET_VER);
     delay(100);
     int i = 0;
     while (Serial2.available())
